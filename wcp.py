@@ -2,11 +2,11 @@
 
 import itchat
 import argparse
-# import io
+import io
 from wem_functions import *
 
-parser = argparse.ArgumentParser(description="Send messages to Wechat user")
-parser.add_argument("msg")
+parser = argparse.ArgumentParser(description="Send file to Wechat users")
+parser.add_argument("file")
 parser.add_argument("user")
 args = parser.parse_args()
 
@@ -21,6 +21,6 @@ recipient_info = chooser(args.user, friends)
 recipient = recipient_info[0]
 recipient_name = recipient_info[1]
 
-print("Sending",args.msg, "to", recipient_name,"("+recipient+")")
+print("Sending",args.file, "to", recipient_name,"("+recipient+")")
 
-print(itchat.send_msg(msg=args.msg, toUserName=recipient))
+print(itchat.send_file(args.file, toUserName=recipient))
