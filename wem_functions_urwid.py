@@ -98,13 +98,6 @@ class Account:
 
 	def friends_and_rooms():
 		friends = Account.get_friends() + Account.get_rooms()
-		
-		for i in friends:
-			if i['RemarkName']:
-				i['CustomName'] = i['RemarkName']
-			else:
-				i['CustomName'] = i['NickName']
-
 		return friends
 
 	def get_rooms():
@@ -210,11 +203,13 @@ class Contact:
 			recipient_name = shortlist[0]['Name']
 
 		elif len(shortlist) > 1:
+			text = len(shortlist) + " users in the list:"
 			# output_widget.set_text(output_widget.text + "\n" + len(shortlist) + " users in the list:\n")
-			print(len(shortlist), "users in the list")
-			print("Please select a user:")
+			# print(len(shortlist), "users in the list")
+			# print("Please select a user:")
 
 			for i in shortlist:
+				# text = text+"\n"+ i['counter'], i['Name']
 				print(i['counter'], i['Name'])
 
 			prompt = int(input('Please choose a user > '))
@@ -228,43 +223,6 @@ class Contact:
 			return (recipient, recipient_name)
 		else:
 			print(Err.user_not_found)
-
-	def chooser_urwid(target, friendlist):
-		counter = 1
-		shortlist = []
-
-		for i in friendlist:
-			if target.lower() in i['Name'].lower():
-				i['counter'] = counter
-				counter += 1
-				shortlist.append(i)
-
-		if len(shortlist) == 1:
-			recipient = shortlist[0]['UserName']
-			recipient_name = shortlist[0]['Name']
-
-		elif len(shortlist) > 1:
-			# output_widget.set_text(output_widget.text + "\n" + len(shortlist) + " users in the list:\n")
-			text = "---- " + str(len(shortlist)) + " users match your search term ----\n"
-			# print("Please select a user:")
-
-			for i in shortlist:
-				text = text + str(i['counter']) + ". " + i['Name']+"\n"
-				# print(i['counter'], i['Name'])
-
-			# prompt = int(input('Please choose a user > '))
-
-			return text
-
-		# 	for i in shortlist:
-		# 		if i['counter'] == prompt:
-		# 			recipient = i['UserName']
-		# 			recipient_name = i['Name']
-
-		# if "recipient" in locals() and "recipient_name" in locals():
-		# 	return (recipient, recipient_name)
-		# else:
-		# 	print(Err.user_not_found)
 
 class Err:
 	error_base = Fore.RED+"Error: "+Style.RESET_ALL

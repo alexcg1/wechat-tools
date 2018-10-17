@@ -18,7 +18,7 @@ itchat.auto_login(True)
 
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
 def download_files(msg):
-	os.chdir('/home/alexcg/Downloads/wechat')
+	os.chdir(download_dir)
 	msg.download(msg.fileName)
 	typeSymbol = {
 		PICTURE: 'img',
